@@ -13,3 +13,23 @@ jobs:
     steps:
       - name: Display Trigger event
         run: echo "${{ toJSON(github.event) }}"
+      - name: Opened Issue Details
+        if: github.event.action == 'opened'
+        run: |
+          echo "Issue Title: ${{ github.event.issue.title }}"
+          echo "Issue Details: ${{ github.event.issue.body }}"
+      - name: Closed Issue Details
+        if: github.event.action == 'closed'
+        run: |
+          echo "Issue Title: ${{ github.event.issue.title }}"
+          echo "Issue Details: ${{ github.event.issue.body }}"
+      - name: Reopened Issue Details
+        if: github.event.action == 'reopened'
+        run: |
+          echo "Issue Title: ${{ github.event.issue.title }}"
+          echo "Issue Details: ${{ github.event.issue.body }}"
+      - name: Deleted Issue Details
+        if: github.event.action == 'deleted'
+        run: |
+          echo "Issue Title: ${{ github.event.issue.title }}"
+          echo "Issue Details: ${{ github.event.issue.body }}"
