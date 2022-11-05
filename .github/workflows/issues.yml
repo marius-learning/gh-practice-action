@@ -8,28 +8,34 @@ on:
       - reopened
 
 jobs:
-  issue:
+  opened:
     runs-on: ubuntu-latest
     steps:
-      - name: Display Trigger event
-        run: echo "${{ toJSON(github.event) }}"
-      - name: Opened Issue Details
-        if: github.event.action == 'opened'
+      - if: github.event.action == 'opened'
         run: |
           echo "Issue Title: ${{ github.event.issue.title }}"
           echo "Issue Details: ${{ github.event.issue.body }}"
-      - name: Closed Issue Details
-        if: github.event.action == 'closed'
+
+  closed:
+    runs-on: ubuntu-latest
+    steps:
+      - if: github.event.action == 'closed'
         run: |
           echo "Issue Title: ${{ github.event.issue.title }}"
           echo "Issue Details: ${{ github.event.issue.body }}"
-      - name: Reopened Issue Details
-        if: github.event.action == 'reopened'
+
+  deleted:
+    runs-on: ubuntu-latest
+    steps:
+      - if: github.event.action == 'closed'
         run: |
           echo "Issue Title: ${{ github.event.issue.title }}"
           echo "Issue Details: ${{ github.event.issue.body }}"
-      - name: Deleted Issue Details
-        if: github.event.action == 'deleted'
+
+  reopened:
+    runs-on: ubuntu-latest
+    steps:
+      - if: github.event.action == 'reopened'
         run: |
           echo "Issue Title: ${{ github.event.issue.title }}"
           echo "Issue Details: ${{ github.event.issue.body }}"
